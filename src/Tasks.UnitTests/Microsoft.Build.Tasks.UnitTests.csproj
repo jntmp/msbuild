@@ -95,6 +95,7 @@
     <Compile Include="XmlPeek_Tests.cs" />
     <Compile Include="XmlPoke_Tests.cs" />
     <Compile Include="CodeTaskFactoryTests.cs" />
+    <Compile Include="Zip_Tests.cs" />
     <EmbeddedResource Include="SampleResx" />
     <None Include="..\Shared\UnitTests\App.config">
       <Link>App.config</Link>
@@ -192,6 +193,10 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{82A7F48D-3B50-4B1E-B82E-3ADA8210C358}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <Import Project="..\dir.targets" />
 </Project>

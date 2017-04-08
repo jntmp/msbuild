@@ -524,6 +524,7 @@
     <Compile Include="XmlPoke.cs" />
     <Compile Include="CodeTaskFactory.cs" />
     <Compile Include="XamlTaskFactory\XamlTaskFactory.cs" />
+    <Compile Include="Zip.cs" />
   </ItemGroup>
   <ItemGroup Condition="$(TargetFrameworkIdentifier) == '.NETFramework'">
     <Compile Include="Al.cs">
@@ -554,7 +555,7 @@
     <Compile Include="AxTlbBaseTask.cs" />
     <Compile Include="BootstrapperUtil\*.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
-    </Compile>    
+    </Compile>
     <Compile Include="ComDependencyWalker.cs">
       <ExcludeFromStyleCop>true</ExcludeFromStyleCop>
     </Compile>
@@ -981,6 +982,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="project.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="System.IO.Compression.FileSystem" />
   </ItemGroup>
   <Import Project="..\dir.targets" />
 </Project>

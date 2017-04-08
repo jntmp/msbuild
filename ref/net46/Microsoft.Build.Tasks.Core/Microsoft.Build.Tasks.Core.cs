@@ -1241,6 +1241,20 @@ namespace Microsoft.Build.Tasks
         public Microsoft.Build.Framework.ITaskItem XslInputPath { get { throw null; } set { } }
         public override bool Execute() { throw null; }
     }
+    public partial class Zip : Microsoft.Build.Tasks.TaskExtension
+    {
+        public Zip() { }
+        [Microsoft.Build.Framework.RequiredAttribute]
+        public Microsoft.Build.Framework.ITaskItem ArchiveName { get { throw null; } set { } }
+        public System.IO.Compression.CompressionLevel CompressionLevel { [System.Runtime.CompilerServices.CompilerGeneratedAttribute]get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute]set { } }
+        [Microsoft.Build.Framework.RequiredAttribute]
+        public Microsoft.Build.Framework.ITaskItem DestinationDirectory { get { throw null; } set { } }
+        public System.Text.Encoding Encoding { [System.Runtime.CompilerServices.CompilerGeneratedAttribute]get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute]set { } }
+        public bool IncludeBaseDirectory { [System.Runtime.CompilerServices.CompilerGeneratedAttribute]get { throw null; } [System.Runtime.CompilerServices.CompilerGeneratedAttribute]set { } }
+        [Microsoft.Build.Framework.RequiredAttribute]
+        public Microsoft.Build.Framework.ITaskItem SourceDirectory { get { throw null; } set { } }
+        public override bool Execute() { throw null; }
+    }
 }
 namespace Microsoft.Build.Tasks.Deployment.Bootstrapper
 {
