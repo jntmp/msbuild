@@ -138,7 +138,6 @@
     <MsbuildDebugger>true</MsbuildDebugger>
     <DefineConstants>$(DefineConstants);DEBUG</DefineConstants>
     <FullFrameworkBuild>true</FullFrameworkBuild>
-    <TargetFramework>net46</TargetFramework>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)' == 'Debug-MONO'">
     <DebugSymbols Condition="'$(DebugSymbols)' == ''">true</DebugSymbols>
