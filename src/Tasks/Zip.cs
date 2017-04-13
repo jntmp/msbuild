@@ -79,33 +79,39 @@ namespace Microsoft.Build.Tasks
             try
             {
                 // Sanitize the directory path, fix relative path etc.
-                var dir = FileUtilities.GetDirectory(SourceDirectory.ItemSpec);
+                var dir = FileUtilities.GetFullPathNoThrow(SourceDirectory.ItemSpec);
 
                 // Verify the directory actually exists on disk
-                if (!FileUtilities.DirectoryExistsNoThrow(dir))
+                if (!FileUtilities.DirectoryExistsNoThrow(dir) || Directory.GetFiles(dir).Length.Equals(0))
                 {
-                    throw new IOException($"Source Directory not found - {dir}");
+                    throw new IOException("Source Directory not found or empty");
                 }
-
+                
                 // Sanitize the destination archive directory path
-                var dest = FileUtilities.GetDirectory(DestinationDirectory.ItemSpec);
+                var dest = FileUtilities.GetFullPathNoThrow(DestinationDirectory.ItemSpec);
 
                 // Verify the archive directory actually exists
                 if (!FileUtilities.DirectoryExistsNoThrow(dest))
                 {
-                    throw new IOException($"Destination directory not found - {dest}");
+                    throw new IOException("Destination directory not found");
                 }
 
                 // Fix the archive name extension. ie. append it if i wasn't supplied.
-                var fileName = FileUtilities.HasExtension(ArchiveName.ItemSpec, new string[] { "zip" }) ?
+                var fileName = FileUtilities.HasExtension(ArchiveName.ItemSpec, new string[] { ".zip" }) ?
                     ArchiveName.ItemSpec :
                     $"{ArchiveName.ItemSpec}.zip";
+
+                var archivePath = Path.Combine(dest, fileName);
+
+                if (FileUtilities.FileExistsNoThrow(archivePath))
+                    FileUtilities.DeleteNoThrow(archivePath);
                 
                 // Do the zip operation on the folder, including the optional parameters
-                ZipFile.CreateFromDirectory(dir, Path.Combine(dest, fileName), this.CompressionLevel, IncludeBaseDirectory);
+                ZipFile.CreateFromDirectory(dir, archivePath, this.CompressionLevel, IncludeBaseDirectory, Encoding);
             }
             catch (Exception e)
             {
+                Console.WriteLine($"{e.Message}: {e.StackTrace}");
                 Log.LogErrorWithCodeFromResources("Zip.Error", SourceDirectory.ItemSpec, DestinationDirectory.ItemSpec, e.Message);
             }
 
